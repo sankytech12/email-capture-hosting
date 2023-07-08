@@ -4,9 +4,17 @@ const Detail=require('../../model/details')
 const router=express.Router();
 
 router.get('/',(req,res,next)=>{
-    res.status(200).json({
-        message:"this is details get request"
-    })
+    Detail.find()
+        .then(result=>{
+            res.status(200).json({
+                detailData:result
+            })
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error:err
+            })
+        })
 })
 
 router.post('/',(req,res,next)=>{
